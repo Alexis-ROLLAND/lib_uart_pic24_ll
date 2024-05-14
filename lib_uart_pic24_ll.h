@@ -41,7 +41,7 @@ typedef enum    {
  /** Type uart_config_t
  * Contient les valeurs à stocker dans les registres 
  * UxMODE, UxSTA et UxBRG pour un UART donné
-  */
+ */
 typedef struct{
     uart_id_t   uartID;                 /**< UART ID                */
     uint16_t    UxMODE;                 /**< UxMODE value */
@@ -80,9 +80,9 @@ uart_err_t  uart_init(uart_desc_t *pUart, const uart_config_t *pUartCFG);
  /**
   * @brief  Send one character on a choosen UART 
   * 
-  * @param[in]   pUart : Address of an initialized uart descriptor
-  * @param[in]   Car : Character to send
-  * @param[in]   BlockingMode : Send in blocking mode or non blocking mode 	
+  * @param[in]      pUart : Address of an initialized uart descriptor
+  * @param          Car : Character to send
+  * @param          BlockingMode : Send in blocking mode or non blocking mode 	
   *  
   * @return     UART_OK on success or UART_TX_FIFO_FULL in non blocking mode if Tx FIFO is full
   */
