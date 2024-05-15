@@ -54,15 +54,12 @@ uart_err_t  uart_init(uart_desc_t *pUart, const uart_config_t *pUartCFG){
 }
 //------------------------------------------------------------------------------
 uart_err_t      uart_putch(const uart_desc_t *pUart, uint8_t Car, uart_tx_blocking_t BlockingMode){
-    if ( ( (*(pUart->pUxSTA)) & UTX_BF_MASK) == 0){      // If Tx Buffer is free, let's Tx whatever mode is
-        *(pUart->pUxTXREG) = Car;
-        return UART_OK;
-    }
-    else {
+    if (( (*(pUart->pUxSTA)) & UTX_BF_MASK) == 1){
         if (BlockingMode == UART_TX_NON_BLOCKING_MODE) return UART_TX_FIFO_FULL;    // Mode non bloquant, buffer plein, on retourne une erreur
-        while ( ( (*(pUart->pUxSTA)) & UTX_BF_MASK) != 0);   // Attente libération buffer
-        *(pUart->pUxTXREG) = Car;
-    }        
+        else while ( ( (*(pUart->pUxSTA)) & UTX_BF_MASK) != 0);                     // Mode bloquant, attente libération buffer
+    }
+    
+    *(pUart->pUxTXREG) = Car;                                                       // Emettre octet
     
     return UART_OK;
 }

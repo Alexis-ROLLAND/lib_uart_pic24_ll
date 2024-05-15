@@ -15,7 +15,7 @@
 #define	NULL    (void*)0
 #endif
 
-#define UTX_BF_MASK (0x0001<<9) /**< Location of the UTXBF bit (UxSTA:9 */
+#define UTX_BF_MASK (0x0001<<9) /**< Location of the UTXBF bit (UxSTA:9) */
 
 typedef enum    {   
     _UART1,     /**< Value for UART1 */
