@@ -19,7 +19,7 @@ uart_err_t  uart_init(uart_desc_t *pUart, const uart_config_t *pUartCFG){
     if (pUartCFG->RxIrqPrio > 7) return UART_BAD_PRIO;
     pUart->RxIrqPrio = pUartCFG->RxIrqPrio;
     
-        switch(pUartCFG->uartID){
+    switch(pUartCFG->uartID){
         case _UART1:
             pUart->pUxBRG = (uint16_t*)&U1BRG;
             pUart->pUxMODE = (uint16_t*)&U1MODE;
@@ -54,7 +54,7 @@ uart_err_t  uart_init(uart_desc_t *pUart, const uart_config_t *pUartCFG){
 }
 //------------------------------------------------------------------------------
 uart_err_t      uart_putch(const uart_desc_t *pUart, uint8_t Car, uart_tx_blocking_t BlockingMode){
-    if (( (*(pUart->pUxSTA)) & UTX_BF_MASK) == 1){
+    if (( (*(pUart->pUxSTA)) & UTX_BF_MASK) != 0){
         if (BlockingMode == UART_TX_NON_BLOCKING_MODE) return UART_TX_FIFO_FULL;    // Mode non bloquant, buffer plein, on retourne une erreur
         else while ( ( (*(pUart->pUxSTA)) & UTX_BF_MASK) != 0);                     // Mode bloquant, attente libération buffer
     }
